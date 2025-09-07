@@ -1,179 +1,154 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tommy Sir 保险顾问演示页</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tommy Sir 保险演示页</title>
 
-  <!-- === Hero styles === -->
-  <style>
-    .insurance-hero{padding:clamp(48px,8vw,96px) 16px;}
-    .ih-wrap{
-      max-width:1100px;margin:0 auto;display:flex;gap:28px;align-items:center;
-      background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:20px;
-      box-shadow:0 18px 40px rgba(0,0,0,.12);padding:28px 30px;
-    }
-    .ih-avatar{
-      width:160px;height:160px;border-radius:50%;object-fit:cover;
-      box-shadow:0 8px 24px rgba(0,0,0,.18);
-    }
-    .ih-copy{flex:1;min-width:0;color:#0b1b2a;}
-    .ih-copy h1{
-      margin:0 0 10px;font-size:clamp(22px,3.3vw,34px);font-weight:800;line-height:1.2;
-    }
-    .ih-sub{margin:0 0 14px;font-size:clamp(14px,1.6vw,16px);color:#2b3a4a;}
-    .ih-badges{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 18px;}
-    .ih-badge{
-      font-size:13px;font-weight:700;letter-spacing:.2px;background:#0b5cff;color:#fff;
-      border-radius:999px;padding:8px 12px;box-shadow:0 6px 16px rgba(11,92,255,.25);
-    }
-    .ih-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:4px}
-    .ih-btn{
-      display:inline-block;padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none;
-    }
-    .ih-btn.primary{background:#0b5cff;color:#fff;box-shadow:0 10px 22px rgba(11,92,255,.25);}
-    .ih-btn.ghost{background:#f2f5ff;color:#0b3bb3;border:1px solid #cdd9ff;}
-    .ih-note{margin-top:12px;font-size:12px;color:#657289}
-    @media (max-width:720px){
-      .ih-wrap{flex-direction:column;align-items:flex-start}
-      .ih-avatar{width:120px;height:120px}
-    }
-  </style>
+<style>
+  :root{
+    --ink:#0c2239; --muted:#5d6b7a;
+    --btnA:#4895ff; --btnB:#0a63c9; /* 老式渐变蓝 */
+    --btnTxt:#ffffff;
+    --card:#ffffffee;
+    --maxw:1100px;
+  }
 
-  <!-- === Body styles === -->
-  <style>
-    :root { --brand:#0b5cff; --gold:#b6922e; --ink:#0b1b2a; --muted:#657289; --soft:#f2f6ff; }
+  /* === 全局背景（使用 GitHub RAW） === */
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+    color:var(--ink);
+    background:
+      url("https://raw.githubusercontent.com/TommyTam2012/Insurance_Demo/main/background.png")
+      center/cover no-repeat fixed;
+  }
 
-    .insurance-body{
-      padding:clamp(40px,7vw,90px) 16px;
-      background:linear-gradient(180deg,#f7faff 0%,#eef4ff 100%);
-      position:relative;
-    }
-    .insurance-body::before{
-      content:""; position:absolute; inset:0; pointer-events:none;
-      background:
-        radial-gradient(1200px 500px at 20% -10%, rgba(11,92,255,.10), transparent),
-        radial-gradient(1000px 400px at 95% 0%, rgba(182,146,46,.10), transparent);
-    }
+  /* 统一容器 */
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:24px 16px;}
 
-    .ib-wrap{
-      max-width:1100px; margin:0 auto;
-      display:grid; gap:26px;
-      grid-template-columns:1.1fr 1.4fr; align-items:center;
-    }
-    .ib-img{
-      width:100%; border-radius:18px;
-      box-shadow:0 20px 40px rgba(0,0,0,.14);
-    }
+  /* 白色卡片承载 */
+  .card{
+    background:var(--card);
+    backdrop-filter: blur(4px);
+    border:1px solid rgba(0,0,0,.06);
+    border-radius:18px;
+    box-shadow:0 18px 46px rgba(0,0,0,.16);
+  }
 
-    .ib-copy h2{ margin:0 0 10px; font-size:clamp(20px,3vw,32px); color:var(--ink); font-weight:800; }
-    .ib-copy p{ margin:0 0 10px; color:#2b3a4a; line-height:1.65; }
-    .ib-list{ margin:12px 0 6px; padding-left:18px; color:#2b3a4a; }
+  /* === 头部：头像 + 老式按钮 === */
+  .hero{margin-top:26px; text-align:center; padding:32px 20px;}
+  .hero .avatar{
+    width:180px; height:180px; border-radius:50%; object-fit:cover;
+    box-shadow:0 12px 28px rgba(0,0,0,.22);
+    border:4px solid #fff;
+  }
+  .hero h1{
+    margin:18px 0 8px; font-size:clamp(22px,3.6vw,38px); font-weight:800; letter-spacing:.5px;
+  }
 
-    .ib-cats{ margin-top:18px; display:flex; flex-wrap:wrap; gap:10px; }
-    .cat-btn{
-      display:inline-block; padding:10px 14px; border-radius:999px; font-weight:700; text-decoration:none;
-      border:1px solid rgba(11,92,255,.25); background:#fff; color:#0b3bb3;
-      box-shadow:0 8px 18px rgba(11,92,255,.12); transition:transform .15s ease;
-    }
-    .cat-btn.primary{
-      background:linear-gradient(90deg,var(--brand),#4aa3ff); color:#fff; border:none;
-      box-shadow:0 10px 26px rgba(11,92,255,.28);
-    }
-    .cat-btn:hover{ transform:translateY(-1px); }
+  /* 老式按钮（矩形、渐变、内外阴影） */
+  .btns{margin:18px auto 4px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center;}
+  .btn{
+    display:inline-block; padding:10px 18px; min-width:116px; text-align:center;
+    color:var(--btnTxt); text-decoration:none; font-weight:700; border-radius:6px;
+    background:linear-gradient(#5aa3ff,#1d79e6 60%, #0a63c9);
+    border:1px solid #0a55a9;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.55),
+      0 6px 16px rgba(10,99,201,.35);
+    text-shadow:0 1px 0 rgba(0,0,0,.25);
+  }
+  .btn:active{transform:translateY(1px);}
 
-    .ib-social{ margin-top:22px; display:flex; flex-wrap:wrap; gap:12px; }
-    .social-btn{
-      display:flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; text-decoration:none; font-weight:700;
-      background:#fff; border:1px solid rgba(0,0,0,.08); box-shadow:0 8px 20px rgba(0,0,0,.08); color:#0b1b2a;
-    }
-    .social-btn img{ width:20px; height:20px; object-fit:contain; }
-    .social-btn.wa{ border-color:rgba(37,211,102,.25); box-shadow:0 10px 24px rgba(37,211,102,.18); }
-    .social-btn.fb{ border-color:rgba(24,119,242,.25); box-shadow:0 10px 24px rgba(24,119,242,.18); }
+  /* === 正文横幅 + 文案 === */
+  .body-sec{margin:26px 0; overflow:hidden;}
+  .banner{
+    width:100%; display:block; border-radius:16px 16px 0 0;
+  }
+  .body-inner{padding:22px 20px;}
+  .body-inner h2{margin:0 0 10px; font-size:clamp(18px,2.6vw,28px);}
+  .body-inner p{margin:0 0 10px; color:#233549; line-height:1.7;}
+  .body-inner ul{margin:8px 0 0 18px; color:#233549; line-height:1.7;}
 
-    .ib-note{ margin-top:10px; font-size:12px; color:var(--muted); }
+  /* === 页脚老式按钮 + 版权 === */
+  footer{margin:26px 0 30px;}
+  .foot-nav{padding:18px; text-align:center;}
+  .foot-btn{
+    display:inline-block; margin:6px 6px; padding:8px 14px; min-width:108px;
+    color:#fff; text-decoration:none; font-weight:700; border-radius:6px;
+    background:linear-gradient(#66a8ff,#2a7dea 60%, #0a63c9);
+    border:1px solid #0a55a9;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.55), 0 6px 16px rgba(10,99,201,.32);
+    text-shadow:0 1px 0 rgba(0,0,0,.25);
+  }
+  .copyright{
+    text-align:center; color:var(--muted); font-size:12px; padding:8px 12px 2px 12px;
+  }
 
-    @media (max-width:900px){
-      .ib-wrap{ grid-template-columns:1fr; }
-    }
-  </style>
+  @media (max-width:780px){
+    .hero .avatar{width:140px;height:140px;}
+  }
+</style>
 </head>
 <body>
 
-  <!-- === HERO：头像 + 标语 + 荣誉 + CTA === -->
-  <section class="insurance-hero">
-    <div class="ih-wrap">
-      <img class="ih-avatar"
-           src="https://raw.githubusercontent.com/TommyTam2012/Insurance_Demo/main/Tommy.png"
-           alt="Tommy Sir 头像">
+  <div class="wrap">
+    <!-- === 头部（头像 + 老式按钮）=== -->
+    <section class="card hero">
+      <img class="avatar" src="https://raw.githubusercontent.com/TommyTam2012/Insurance_Demo/main/Tommy.png" alt="Tommy Sir 头像">
+      <h1>Tommy Sir：您忠诚可信赖的保险顾问</h1>
 
-      <div class="ih-copy">
-        <h1>Tommy Sir：您忠诚可信赖的保险顾问</h1>
-        <p class="ih-sub">
-          20年专业服务经验 · 连续10年 <strong>TOT 顶尖会员</strong> · 6次 <strong>COT 卓越会员</strong> · 4次 <strong>MDRT 百万圆桌会员</strong>
-        </p>
-
-        <div class="ih-badges">
-          <span class="ih-badge">20年经验</span>
-          <span class="ih-badge">TOT ×10</span>
-          <span class="ih-badge">COT ×6</span>
-          <span class="ih-badge">MDRT ×4</span>
-        </div>
-
-        <div class="ih-ctas">
-          <a class="ih-btn primary" href="#book">预约保单体检</a>
-          <a class="ih-btn ghost" href="https://wa.me/85200000000" target="_blank" rel="noopener">WhatsApp 咨询</a>
-          <a class="ih-btn ghost" href="#wechat">微信联系</a>
-        </div>
-
-        <p class="ih-note">
-          ※ 本页为演示（Demo）用途；以上荣誉为示例文案。MDRT/TOT/COT 为 Million Dollar Round Table 相关标识，公开使用请遵循品牌与合规规范。
-        </p>
+      <!-- 老式按钮：头像下方 -->
+      <div class="btns">
+        <a class="btn" href="#health">健康保险</a>
+        <a class="btn" href="#life">人寿保险</a>
+        <a class="btn" href="#fund">投资基金</a>
+        <a class="btn" href="#edu">教育基金</a>
+        <a class="btn" href="#auto">汽车保险</a>
+        <a class="btn" href="#gallery">生活照片</a>
+        <a class="btn" href="#contact">联系我</a>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- === BODY：图片 + 介绍 + 分类按钮 + 社交按钮 === -->
-  <section class="insurance-body">
-    <div class="ib-wrap">
-      <img class="ib-img"
+    <!-- === 正文：横幅 + 文案 === -->
+    <section class="card body-sec" id="health">
+      <!-- tot.png 横幅图 -->
+      <img class="banner"
            src="https://raw.githubusercontent.com/TommyTam2012/Insurance_Demo/main/tot.png"
-           alt="Top of the Table 展示图">
-
-      <div class="ib-copy">
+           alt="Top of the Table 横幅">
+      <div class="body-inner">
         <h2>以家庭为本，以长期价值为先</h2>
         <p>为您与家人量身设计保障与财富规划：从日常医疗、重疾与人寿，到退休储蓄与传承安排，确保关键时刻有保障，长期目标有方向。</p>
-        <ul class="ib-list">
+        <ul>
           <li>一对一风险盘点与保单体检</li>
           <li>多家保险公司方案比对与费率优化</li>
           <li>理赔指导与长期服务跟进</li>
           <li>企业主保障：高管/关键人险、团体医疗</li>
           <li>跨境/海外医疗方案咨询</li>
         </ul>
-
-        <div class="ib-cats">
-          <a class="cat-btn primary" href="#health">健康医疗保障</a>
-          <a class="cat-btn" href="#ci">重大疾病</a>
-          <a class="cat-btn" href="#life">人寿/家庭保障</a>
-          <a class="cat-btn" href="#retire">退休与储蓄</a>
-          <a class="cat-btn" href="#keyman">企业关键人险</a>
-        </div>
-
-        <div class="ib-social">
-          <a class="social-btn wa" href="https://wa.me/85200000000" target="_blank" rel="noopener">
-            <img src="https://raw.githubusercontent.com/TommyTam2012/Insurance_Demo/main/Whatsapp.png" alt="WhatsApp">
-            <span>WhatsApp 咨询</span>
-          </a>
-          <a class="social-btn fb" href="https://facebook.com/YourPage" target="_blank" rel="noopener">
-            <img src="https://raw.githubusercontent.com/TommyTam2012/Insurance_Demo/main/facebook.png" alt="Facebook">
-            <span>Facebook 私信</span>
-          </a>
-        </div>
-
-        <p class="ib-note">※ 本页为演示用途；如需正式对外宣传，请按监管与平台合规要求调整内容与声明。</p>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- 这里可按需追加更多分区：#life #fund #edu #auto #gallery #contact -->
+
+    <!-- === 页脚 === -->
+    <footer class="card">
+      <div class="foot-nav">
+        <a class="foot-btn" href="#health">健康保险</a>
+        <a class="foot-btn" href="#life">人寿保险</a>
+        <a class="foot-btn" href="#fund">投资基金</a>
+        <a class="foot-btn" href="#edu">教育基金</a>
+        <a class="foot-btn" href="#auto">汽车保险</a>
+        <a class="foot-btn" href="#gallery">生活照片</a>
+        <a class="foot-btn" href="#contact">联系我</a>
+      </div>
+      <div class="copyright">
+        © 2025 Tommy Sir 保险演示页 · 仅供演示用途
+      </div>
+    </footer>
+  </div>
 
 </body>
 </html>
