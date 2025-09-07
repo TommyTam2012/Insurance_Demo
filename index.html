@@ -1,93 +1,64 @@
+<!-- === Insurance Hero Header (Chinese) — with GitHub RAW image === -->
 <style>
-  /* === Dental background + transparent header/gap === */
-  body { margin:0; padding:0; background:none !important; }
-  body::before{
-    content:""; position:fixed; inset:0;
-    background:url('https://www.taeasla.com/image/Dental.png') center/cover no-repeat fixed;
-    z-index:-1;
+  .insurance-hero{padding:clamp(48px,8vw,96px) 16px;}
+  .ih-wrap{
+    max-width:1100px;margin:0 auto;display:flex;gap:28px;align-items:center;
+    background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:20px;
+    box-shadow:0 18px 40px rgba(0,0,0,.12);padding:28px 30px;
   }
-  header,.journal-header-default,.journal-header-center,.journal-top-bar,
-  .extended-container,.content-top { background:transparent !important; }
-
-  /* === Centered content block === */
-  .link-container{
-    display:flex; flex-direction:column; justify-content:center; align-items:center;
-    gap:25px; min-height:120vh; text-align:center; padding:2rem 1rem; position:relative;
+  .ih-avatar{
+    width:160px;height:160px;border-radius:50%;object-fit:cover;
+    box-shadow:0 8px 24px rgba(0,0,0,.18);
   }
-
-  /* Title button/link */
-  .link-container a.title-link{
-    font-size:1.8rem; font-weight:800; color:#fff; text-decoration:none;
-    background:rgba(0,0,0,0.6); padding:14px 28px; border-radius:12px;
-    box-shadow:0 8px 22px rgba(0,0,0,.35); transition:all .3s;
+  .ih-copy{flex:1;min-width:0;color:#0b1b2a;}
+  .ih-copy h1{
+    margin:0 0 10px;font-size:clamp(22px,3.3vw,34px);font-weight:800;line-height:1.2;
   }
-  .link-container a.title-link:hover{ background:rgb(182,146,46); color:#000; }
-
-  /* Images (responsive) */
-  .link-container img{
-    max-width:900px; width:100%; height:auto; border-radius:15px;
-    box-shadow:0 10px 28px rgba(0,0,0,.6); display:block;
+  .ih-sub{margin:0 0 14px;font-size:clamp(14px,1.6vw,16px);color:#2b3a4a;}
+  .ih-badges{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 18px;}
+  .ih-badge{
+    font-size:13px;font-weight:700;letter-spacing:.2px;background:#0b5cff;color:#fff;
+    border-radius:999px;padding:8px 12px;box-shadow:0 6px 16px rgba(11,92,255,.25);
   }
-  .link-container img.top-photo{ max-width:600px; }
-
-  /* Heygen rectangular embed inside image container (bottom-right) */
-  #heygen-streaming-embed{
-    position:absolute; bottom:10px; right:10px;
-    width:320px; height:180px;  /* widescreen rectangle */
-    border-radius:8px; overflow:hidden;
-    box-shadow:0 6px 20px rgba(0,0,0,.35);
-    background:#000; z-index:99;
+  .ih-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:4px}
+  .ih-btn{
+    display:inline-block;padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none;
   }
-  #heygen-streaming-embed iframe{
-    width:100%; height:100%; border:0;
-  }
-  @media(max-width:540px){
-    #heygen-streaming-embed{ width:240px; height:135px; }
-  }
+  .ih-btn.primary{background:#0b5cff;color:#fff;box-shadow:0 10px 22px rgba(11,92,255,.25);}
+  .ih-btn.ghost{background:#f2f5ff;color:#0b3bb3;border:1px solid #cdd9ff;}
+  .ih-note{margin-top:12px;font-size:12px;color:#657289}
+  @media (max-width:720px){.ih-wrap{flex-direction:column;align-items:flex-start}.ih-avatar{width:120px;height:120px}}
 </style>
 
-<script>
-/* === Journal menu dropdown patch (dark dropdowns) === */
-(function(){
-  const CSS = `
-    body.information-page .super-menu > li > ul,
-    body.information-page .super-menu ul.sub-menu,
-    body.information-page .super-menu ul,
-    body.information-page .super-menu > li:hover > ul,
-    body.information-page .journal-menu .super-menu > li > ul{
-      background:#000 !important; border:none !important; box-shadow:0 4px 15px rgba(0,0,0,.4) !important;
-    }
-    body.information-page .super-menu > li > ul > li > a,
-    body.information-page .super-menu ul.sub-menu > li > a{
-      color:#fff !important; display:block; padding:8px 15px;
-    }
-    body.information-page .super-menu > li > ul > li > a:hover,
-    body.information-page .super-menu ul.sub-menu > li > a:hover{
-      color:rgb(182,146,46) !important; background-color:rgba(255,255,255,.1) !important;
-    }
-  `;
-  function injectOnce(){
-    if(document.getElementById('ven-force-dropdown')) return;
-    const tag=document.createElement('style'); tag.id='ven-force-dropdown'; tag.type='text/css';
-    tag.appendChild(document.createTextNode(CSS)); document.head.appendChild(tag);
-  }
-  document.addEventListener('DOMContentLoaded', injectOnce);
-  window.addEventListener('load', ()=>{ injectOnce(); setTimeout(injectOnce,400); setTimeout(injectOnce,1200); });
-  const obs=new MutationObserver(injectOnce);
-  obs.observe(document.documentElement,{childList:true,subtree:true});
-})();
-</script>
+<section class="insurance-hero">
+  <div class="ih-wrap">
+    <!-- 使用 GitHub RAW 图片地址 -->
+    <img class="ih-avatar"
+         src="https://raw.githubusercontent.com/TommyTam2012/Insurance_Demo/main/Tommy.png"
+         alt="Tommy Sir 头像">
 
-<!-- === Content === -->
-<div class="link-container">
-  <a class="title-link" href="https://dental-web-demo.vercel.app" target="_blank" rel="noopener">
-    保险代理人演示。<br>
-    <img src="https://www.taeasla.com/image/Dental_Demo_3.png" alt="Dental Demo" class="top-photo">
-    <br>請點這裡
-  </a>
+    <div class="ih-copy">
+      <h1>Tommy Sir：您忠诚可信赖的保险顾问</h1>
+      <p class="ih-sub">
+        20年专业服务经验 · 连续10年 <strong>TOT 顶尖会员</strong> · 6次 <strong>COT 卓越会员</strong> · 4次 <strong>MDRT 百万圆桌会员</strong>
+      </p>
 
-  <!-- Heygen Chatbot Embed inside image container -->
-  <div id="heygen-streaming-embed">
-    <iframe src="https://labs.heygen.com/guest/streaming-embed?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiJlMzA1NDViNDgwNGM0YzhmYTM4NDg3YjVi%0AZTJkNmQ1YyIsInByZXZpZXdJbWciOiJodHRwczovL2ZpbGVzMi5oZXlnZW4uYWkvYXZhdGFyL3Yz%0AL2UzMDU0NWI0ODA0YzRjOGZhMzg0ODdiNWJlMmQ2ZDVjL2Z1bGwvMi4yL3ByZXZpZXdfdGFyZ2V0%0ALndlYnAiLCJuZWVkUmVtb3ZlQmFja2dyb3VuZCI6ZmFsc2UsImtub3dsZWRnZUJhc2VJZCI6IjU0%0ANjU4MTFmZDg0YjQ2M2Y5Mzg0Mzk5OWM3ZDg1NjE1IiwidXNlcm5hbWUiOiJlNTFlZmYzZjJhYzA0%0AZGZjYjQ3MGQzNmM2OWRiMWNlNiJ9&inIFrame=1" allow="microphone"></iframe>
+      <div class="ih-badges">
+        <span class="ih-badge">20年经验</span>
+        <span class="ih-badge">TOT ×10</span>
+        <span class="ih-badge">COT ×6</span>
+        <span class="ih-badge">MDRT ×4</span>
+      </div>
+
+      <div class="ih-ctas">
+        <a class="ih-btn primary" href="#book">预约保单体检</a>
+        <a class="ih-btn ghost" href="https://wa.me/85200000000" target="_blank" rel="noopener">WhatsApp 咨询</a>
+        <a class="ih-btn ghost" href="#wechat">微信联系</a>
+      </div>
+
+      <p class="ih-note">
+        ※ 本页为演示（Demo）用途；以上荣誉为示例文案。MDRT/TOT/COT 为 Million Dollar Round Table 相关标识，公开使用请遵循品牌与合规规范。
+      </p>
+    </div>
   </div>
-</div>
+</section>
