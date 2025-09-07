@@ -36,7 +36,17 @@
     }
 
     /* === 头部：头像 + 老式按钮 === */
-    .hero{margin-top:26px; text-align:center; padding:32px 20px;}
+    .hero{
+  margin-top:26px; 
+  text-align:center; 
+  padding:32px 20px;
+
+  /* header background (with a soft white overlay for readability) */
+  background:
+    linear-gradient(rgba(255,255,255,.90), rgba(255,255,255,.90)),
+    url("https://raw.githubusercontent.com/TommyTam2012/Insurance_Demo/main/office.png")
+      center/cover no-repeat;
+}
     .hero .avatar{
       width:180px; height:180px; border-radius:50%; object-fit:cover;
       box-shadow:0 12px 28px rgba(0,0,0,.22);
