@@ -1,0 +1,93 @@
+<style>
+  /* === Dental background + transparent header/gap === */
+  body { margin:0; padding:0; background:none !important; }
+  body::before{
+    content:""; position:fixed; inset:0;
+    background:url('https://www.taeasla.com/image/Dental.png') center/cover no-repeat fixed;
+    z-index:-1;
+  }
+  header,.journal-header-default,.journal-header-center,.journal-top-bar,
+  .extended-container,.content-top { background:transparent !important; }
+
+  /* === Centered content block === */
+  .link-container{
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    gap:25px; min-height:120vh; text-align:center; padding:2rem 1rem; position:relative;
+  }
+
+  /* Title button/link */
+  .link-container a.title-link{
+    font-size:1.8rem; font-weight:800; color:#fff; text-decoration:none;
+    background:rgba(0,0,0,0.6); padding:14px 28px; border-radius:12px;
+    box-shadow:0 8px 22px rgba(0,0,0,.35); transition:all .3s;
+  }
+  .link-container a.title-link:hover{ background:rgb(182,146,46); color:#000; }
+
+  /* Images (responsive) */
+  .link-container img{
+    max-width:900px; width:100%; height:auto; border-radius:15px;
+    box-shadow:0 10px 28px rgba(0,0,0,.6); display:block;
+  }
+  .link-container img.top-photo{ max-width:600px; }
+
+  /* Heygen rectangular embed inside image container (bottom-right) */
+  #heygen-streaming-embed{
+    position:absolute; bottom:10px; right:10px;
+    width:320px; height:180px;  /* widescreen rectangle */
+    border-radius:8px; overflow:hidden;
+    box-shadow:0 6px 20px rgba(0,0,0,.35);
+    background:#000; z-index:99;
+  }
+  #heygen-streaming-embed iframe{
+    width:100%; height:100%; border:0;
+  }
+  @media(max-width:540px){
+    #heygen-streaming-embed{ width:240px; height:135px; }
+  }
+</style>
+
+<script>
+/* === Journal menu dropdown patch (dark dropdowns) === */
+(function(){
+  const CSS = `
+    body.information-page .super-menu > li > ul,
+    body.information-page .super-menu ul.sub-menu,
+    body.information-page .super-menu ul,
+    body.information-page .super-menu > li:hover > ul,
+    body.information-page .journal-menu .super-menu > li > ul{
+      background:#000 !important; border:none !important; box-shadow:0 4px 15px rgba(0,0,0,.4) !important;
+    }
+    body.information-page .super-menu > li > ul > li > a,
+    body.information-page .super-menu ul.sub-menu > li > a{
+      color:#fff !important; display:block; padding:8px 15px;
+    }
+    body.information-page .super-menu > li > ul > li > a:hover,
+    body.information-page .super-menu ul.sub-menu > li > a:hover{
+      color:rgb(182,146,46) !important; background-color:rgba(255,255,255,.1) !important;
+    }
+  `;
+  function injectOnce(){
+    if(document.getElementById('ven-force-dropdown')) return;
+    const tag=document.createElement('style'); tag.id='ven-force-dropdown'; tag.type='text/css';
+    tag.appendChild(document.createTextNode(CSS)); document.head.appendChild(tag);
+  }
+  document.addEventListener('DOMContentLoaded', injectOnce);
+  window.addEventListener('load', ()=>{ injectOnce(); setTimeout(injectOnce,400); setTimeout(injectOnce,1200); });
+  const obs=new MutationObserver(injectOnce);
+  obs.observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+
+<!-- === Content === -->
+<div class="link-container">
+  <a class="title-link" href="https://dental-web-demo.vercel.app" target="_blank" rel="noopener">
+    牙科示範網站<br>
+    <img src="https://www.taeasla.com/image/Dental_Demo_3.png" alt="Dental Demo" class="top-photo">
+    <br>請點這裡
+  </a>
+
+  <!-- Heygen Chatbot Embed inside image container -->
+  <div id="heygen-streaming-embed">
+    <iframe src="https://labs.heygen.com/guest/streaming-embed?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiJlMzA1NDViNDgwNGM0YzhmYTM4NDg3YjVi%0AZTJkNmQ1YyIsInByZXZpZXdJbWciOiJodHRwczovL2ZpbGVzMi5oZXlnZW4uYWkvYXZhdGFyL3Yz%0AL2UzMDU0NWI0ODA0YzRjOGZhMzg0ODdiNWJlMmQ2ZDVjL2Z1bGwvMi4yL3ByZXZpZXdfdGFyZ2V0%0ALndlYnAiLCJuZWVkUmVtb3ZlQmFja2dyb3VuZCI6ZmFsc2UsImtub3dsZWRnZUJhc2VJZCI6IjU0%0ANjU4MTFmZDg0YjQ2M2Y5Mzg0Mzk5OWM3ZDg1NjE1IiwidXNlcm5hbWUiOiJlNTFlZmYzZjJhYzA0%0AZGZjYjQ3MGQzNmM2OWRiMWNlNiJ9&inIFrame=1" allow="microphone"></iframe>
+  </div>
+</div>
